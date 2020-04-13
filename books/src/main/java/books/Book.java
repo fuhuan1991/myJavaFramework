@@ -12,13 +12,4 @@ public class Book extends Model {
 
     @Column
     public int num_copies;
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", num_copies=" + num_copies +
-                '}';
-    }
 }

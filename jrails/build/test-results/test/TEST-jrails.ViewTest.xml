@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="jrails.ViewTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-04-06T22:01:32" hostname="fuhuan.local" time="0.054">
-  <properties/>
-  <testcase name="form" classname="jrails.ViewTest" time="0.047"/>
-  <testcase name="show" classname="jrails.ViewTest" time="0.003"/>
-  <testcase name="empty" classname="jrails.ViewTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

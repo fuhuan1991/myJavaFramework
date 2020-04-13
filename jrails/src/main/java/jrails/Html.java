@@ -88,7 +88,7 @@ public class Html {
     }
 
     public Html textarea(String name, Html child) {
-        String start = "<textarea name=" + name + ">";
+        String start = "<textarea name=\"" + name + "\">";
         String end = "</textarea>";
         return new Html(this.text + start + child.toString() + end);
     }

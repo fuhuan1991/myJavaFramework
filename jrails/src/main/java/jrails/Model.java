@@ -38,7 +38,7 @@ public class Model {
                         throw new Error("The only possible types for @Column fields are String, int, and boolean!");
                     }
                 } catch (Exception e) {
-                    System.out.println(e);
+                    throw new Error(e);
                 }
             }
         }
@@ -46,7 +46,8 @@ public class Model {
         // write to the file
         if (this.id == 0) {
             // create a new row
-            CsvUtil.insert(path, ArrayListToStringArray(row));
+            int newId = CsvUtil.insert(path, ArrayListToStringArray(row));
+            this.id = newId;
         } else {
             // update existing row
             CsvUtil.update(path, id, ArrayListToStringArray(row));
@@ -81,7 +82,7 @@ public class Model {
         return result;
     }
 
-    public void destroy() throws Exception {
+    public void destroy(){
         String className = this.getClass().getSimpleName();
         String path = "./db/" + className + ".csv";
         CsvUtil.delete(path, this.id);
@@ -122,13 +123,12 @@ public class Model {
                     field.set(obj, Integer.parseInt(row[(i+1)%row.length]));
                 } else {
                     // boolean
-                    if (row[(i+1)%row.length] == "true") field.set(obj, true);
-                    if (row[(i+1)%row.length] == "false") field.set(obj, false);
+                    if (row[(i+1)%row.length].equals("true")) field.set(obj, true);
+                    if (row[(i+1)%row.length].equals("false")) field.set(obj, false);
                 }
             }
             return obj;
         } catch (Exception e) {
-            System.out.println(e);
             return null;
         }
     }

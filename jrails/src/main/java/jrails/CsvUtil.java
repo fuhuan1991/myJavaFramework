@@ -32,7 +32,7 @@ public class CsvUtil {
         result.add(row);
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new Error(e);
     }
     return result;
   }
@@ -89,7 +89,7 @@ public class CsvUtil {
   }
 
   // delete
-  public static boolean delete (String path, int id) throws Exception {
+  public static boolean delete (String path, int id){
     ArrayList<String[]> result = readAll(path);
     ArrayList<String[]> newResult = new ArrayList<>();
     boolean targetFound = false;
@@ -106,7 +106,8 @@ public class CsvUtil {
     }
 
     if (!targetFound) {
-      throw new Exception("this id doesn't exist!");
+//      throw new Exception("this id doesn't exist!");
+      throw new RuntimeException("this id doesn't exist!");
     }
 
     // write them back into the file
@@ -114,7 +115,7 @@ public class CsvUtil {
   }
 
   // insert
-  public static boolean insert(String path, String[] content) {
+  public static int insert(String path, String[] content) {
     ArrayList<String[]> result = readAll(path);
     int maxId = 0;
     // figure out the id for new record
@@ -125,7 +126,8 @@ public class CsvUtil {
 
     result.add(addId(Integer.toString(nextId), content));
     // write them back into the file
-    return writeListToFile(path, result);
+    writeListToFile(path, result);
+    return nextId;
   }
 
   // deleteAll
@@ -142,7 +144,7 @@ public class CsvUtil {
         fwOb.close();
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new Error(e);
     }
   }
 
@@ -157,9 +159,7 @@ public class CsvUtil {
       csvWriter.flush();
       csvWriter.close();
     } catch (Exception e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-      return false;
+      throw new Error(e);
     }
     return true;
   }

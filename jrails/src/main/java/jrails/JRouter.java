@@ -39,13 +39,8 @@ public class JRouter {
             Object obj = klass.getConstructor().newInstance();
             return (Html) method.invoke(obj, params);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Error(e);
         }
-        return new Html("Error");
-    }
-
-    public void show () {
-        System.out.println(this.store);
     }
 
     class Record {
